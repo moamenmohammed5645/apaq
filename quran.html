@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>موقع عبق</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body dir="rtl">
+  <header>
+    <div>
+      <a href="index.html"><img height="66px" src="logo.png" alt=""></a>
+    </div>
+    <button style="font-size: 37px;" class="toggle-button" onclick="toggleNav()">&#9776;</button>
+    <div class="Nav">
+      <nav id="mainNav">
+        <a href="quran.html"><i class="fas fa-quran"></i> القران الكريم</a>
+        <a href="theker.html"><i class="fas fa-praying-hands"></i> الأذكار</a>
+        <a href="goodwork.html"><i class="fas fa-hands-helping"></i>  الاعمال الصالحة</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="action-icons">
+      <button title="نسخ" id="copy-btn" onclick="copyText()"><i class="fas fa-copy"></i></button>
+      <button title="مشاركة" id="share-btn" onclick="shareText()"><i class="fas fa-share-alt"></i></button>
+      <button title="اعادة تحميل" id="random-btn" onclick="changeRandomText()"><i class="fas fa-random"></i></button>
+    </div>
+    <div style="font-size: 35px;" id="text"></div>
+    <div id="audio"></div>
+  </main>
+  <footer>
+    <a href="https://www.facebook.com/" target="_blank" class="social-icons"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.youtube.com/" target="_blank" class="social-icons"><i class="fab fa-youtube"></i></a>
+    <a href="https://wa.me/1234567890" target="_blank" class="social-icons"><i class="fab fa-whatsapp"></i></a>
+  </footer>
+<script src="quran.js"></script>
+  <script>
+    function toggleNav() {
+      var nav = document.getElementById("mainNav");
+      if (nav.style.display === "none") {
+        nav.style.display = "flex";
+      } else {
+        nav.style.display = "none";
+      }
+    }
+let changenumber = Math.floor(Math.random()*QuranVerses.length) 
+console.log(changenumber)
+let randam = QuranVerses[changenumber].aya
+document.getElementById("text").innerHTML = randam
+document.getElementById("audio").innerHTML = `<audio src="aduio/Voice ${changenumber + 1} .mp3" controls></audio>`
+
+function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function setRandomBackgroundColor() {
+      const randomColor = getRandomColor();
+      document.body.style.backgroundColor = randomColor;
+    }
+
+    // قم بتحديد لون خلفية عشوائي عند تحميل الصفحة
+    setRandomBackgroundColor();
+
+    // قم بتحديث لون خلفية عشوائي عند النقر على الصفحة
+    // document.body.addEventListener('click', setRandomBackgroundColor);
+
+    // قم بتحديث لون خلفية عشوائي كل 20 ثانية
+    setInterval(setRandomBackgroundColor, 10000);
+
+
+
+    function copyText() {
+      const textToCopy = document.getElementById('text').innerText;
+      navigator.clipboard.writeText(textToCopy).then(function () {
+        // alert('تم نسخ النص!');
+      }).catch(function (err) {
+        console.error('فشل في نسخ النص: ', err);
+      });
+    }
+    function shareText() {
+      const textToShare = document.getElementById('text').innerText;
+      // استبدل الرابط التالي بالرابط الفعلي الذي تريد مشاركة النص عبره
+      const sharingURL = 'https://example.com/share?text=' + encodeURIComponent(textToShare);
+      window.open(sharingURL, '_blank');
+    }
+
+    function changeRandomText() {
+      let changenumber = Math.floor(Math.random()* QuranVerses.length);
+      let randam = QuranVerses[changenumber].aya;
+      document.getElementById("text").innerHTML = randam;
+      document.getElementById("audio").innerHTML = `<audio src="Voice ${changenumber + 1} .mp3" controls></audio>`
+
+    }
+  </script>
+</body>
+
+</html>

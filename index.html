@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>موقع عبق</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      form {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input,
+      select {
+        width: 300px;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+      #quranForm {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 950px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #333;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 1000px) {
+        #quranForm {
+          display: flex;
+          flex-direction: column;
+          width: fit-content;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #333;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #quranForm label {
+          font-size: 16px;
+        }
+        #audioplayer {
+          width: 300px;
+        }
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      select {
+        width: 300px;
+
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      audio {
+        margin-top: 20px;
+        width: 650px;
+      }
+    </style>
+  </head>
+  <body dir="rtl">
+    <header>
+      <div>
+        <a href="apaq.html"><img height="66px" src="logo.png" alt="" /></a>
+      </div>
+      <button
+        style="font-size: 37px"
+        class="toggle-button"
+        onclick="toggleNav()"
+      >
+        &#9776;
+      </button>
+      <div class="Nav">
+        <nav id="mainNav">
+          <a href="quran.html"><i class="fas fa-quran"></i> القران الكريم</a>
+          <a href="theker.html"><i class="fas fa-praying-hands"></i> الأذكار</a>
+          <a href="goodwork.html"
+            ><i class="fas fa-hands-helping"></i> الاعمال الصالحة</a
+          >
+        </nav>
+      </div>
+    </header>
+    <main>
+      <!-- <div class="action-icons">
+      <button title="نسخ" id="copy-btn" onclick="copyText()"><i class="fas fa-copy"></i></button>
+      <button title="مشاركة" id="share-btn" onclick="shareText()"><i class="fas fa-share-alt"></i></button>
+      <button title="اعادة تحميل" id="random-btn" onclick="changeRandomText()"><i class="fas fa-random"></i></button>
+    </div> -->
+      <div style="font-size: 35px" id="text">
+        <form id="quranForm">
+          <div>
+            <label for="readerName">اختر اسم القارئ</label>
+            <select id="readerName" name="readerName" required></select>
+          </div>
+          <div>
+            <label for="novelName">اختر الرواية</label>
+            <select id="novelName" name="novelName" required></select>
+          </div>
+          <div>
+            <label for="Surah">اختر السورة</label>
+            <select id="SurahName" name="Surah" required></select>
+          </div>
+        </form>
+        <audio id="audioplayer" src="" controls>
+          <source src="" />
+        </audio>
+      </div>
+    </main>
+    <footer>
+      <a href="https://www.facebook.com/" target="_blank" class="social-icons"
+        ><i class="fab fa-facebook"></i
+      ></a>
+      <a href="https://www.youtube.com/" target="_blank" class="social-icons"
+        ><i class="fab fa-youtube"></i
+      ></a>
+      <a href="https://wa.me/1234567890" target="_blank" class="social-icons"
+        ><i class="fab fa-whatsapp"></i
+      ></a>
+    </footer>
+    <script src="quran.js"></script>
+    <script>
+      function toggleNav() {
+        var nav = document.getElementById("mainNav");
+        if (nav.style.display === "none") {
+          nav.style.display = "flex";
+        } else {
+          nav.style.display = "none";
+        }
+      }
+      let changenumber = Math.floor(Math.random() * Citation.length);
+      console.log(changenumber);
+      let randam = Citation[changenumber];
+      document.getElementById("text").innerHTML = randam;
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function setRandomBackgroundColor() {
+        const randomColor = getRandomColor();
+        document.body.style.backgroundColor = randomColor;
+      }
+
+      // قم بتحديد لون خلفية عشوائي عند تحميل الصفحة
+      setRandomBackgroundColor();
+
+      // قم بتحديث لون خلفية عشوائي عند النقر على الصفحة
+      // document.body.addEventListener('click', setRandomBackgroundColor);
+
+      // قم بتحديث لون خلفية عشوائي كل 20 ثانية
+      setInterval(setRandomBackgroundColor, 10000);
+
+      function copyText() {
+        const textToCopy = document.getElementById("text").innerText;
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(function () {
+            // alert('تم نسخ النص!');
+          })
+          .catch(function (err) {
+            console.error("فشل في نسخ النص: ", err);
+          });
+      }
+      function shareText() {
+        const textToShare = document.getElementById("text").innerText;
+        // استبدل الرابط التالي بالرابط الفعلي الذي تريد مشاركة النص عبره
+        const sharingURL =
+          "https://example.com/share?text=" + encodeURIComponent(textToShare);
+        window.open(sharingURL, "_blank");
+      }
+
+      function changeRandomText() {
+        let changenumber = Math.floor(Math.random() * Citation.length);
+        let randam = Citation[changenumber];
+        document.getElementById("text").innerHTML = randam;
+      }
+    </script>
+    <script>
+      let apiurl = "https://mp3quran.net/api/v3/reciters";
+      let language = "ar";
+
+      async function getreciters() {
+        const readerName = document.getElementById("readerName");
+        const res = await fetch(`${apiurl}?language=${language}`);
+        const data = await res.json();
+        readerName.innerHTML = `<option value="">اختر القارئ</option>`;
+
+        data.reciters.forEach((reciter) => {
+          readerName.innerHTML += `<option value="${reciter.id}">${reciter.name}</option>`;
+        });
+
+        readerName.addEventListener("change", (e) =>
+          getmousahf(e.target.value)
+        );
+      }
+
+      async function getmousahf(reciter) {
+        const novelName = document.getElementById("novelName");
+        const res = await fetch(
+          `${apiurl}?language=${language}&reciter=${reciter}`
+        );
+        const data = await res.json();
+        const moshafs = data.reciters[0].moshaf;
+        novelName.innerHTML = `<option value="">اختر الرواية</option>`;
+
+        moshafs.forEach((moshaf) => {
+          novelName.innerHTML += `<option value="${moshaf.id}" data-server="${moshaf.server}" data-surah_list="${moshaf.surah_list}">${moshaf.name}</option>`;
+        });
+
+        novelName.addEventListener("change", (e) => {
+          const selectedmoshaf = novelName.options[novelName.selectedIndex];
+          const surahserver = selectedmoshaf.dataset.server;
+          const surahlist = selectedmoshaf.dataset.surah_list;
+          getsurah(surahserver, surahlist);
+        });
+      }
+
+      async function getsurah(surahserver, surahlist) {
+        const Surahname = document.getElementById("SurahName");
+        const res = await fetch("https://mp3quran.net/api/v3/suwar");
+        const data = await res.json();
+        surahlist = surahlist.split(",");
+        Surahname.innerHTML = `<option value="">اختر سورة</option>`;
+
+        surahlist.forEach((surah) => {
+          const padsurah = surah.padStart(3, "0");
+          data.suwar.forEach((surahName) => {
+            if (surahName.id == surah) {
+              Surahname.innerHTML += `<option value="${surahserver}${padsurah}.mp3">${surahName.name}</option>`;
+            }
+          });
+        });
+
+        Surahname.addEventListener("change", (e) => {
+          const selectedsurah = Surahname.options[Surahname.selectedIndex];
+          playsurah(selectedsurah.value);
+        });
+      }
+
+      function playsurah(surahmp3) {
+        const audioplayer = document.getElementById("audioplayer");
+        audioplayer.src = surahmp3;
+        audioplayer.play();
+      }
+
+      getreciters();
+    </script>
+  </body>
+</html>
